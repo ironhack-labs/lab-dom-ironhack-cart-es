@@ -3,31 +3,36 @@
 const updateSubtotal = (product) => {
   let price = product.querySelector('.price span');
   let quantity = product.querySelector('.quantity input');
-  let subTotal = product.querySelector('.subtotal span');
 
-  const calculate = (price.innerText) * quantity.value;
-  const result = (subTotal.innerText) = calculate;
+  let priveValue = parseFloat(price.innerHTML);
+  let quantityValue = quantity.value;
 
-  return result;
+  let subTotalValue = priveValue * quantityValue;
+  let subTotalContainer = product.querySelector('.subtotal span')
+
+  subTotalContainer.innerHTML = subTotalValue;
+
+  return subTotalValue;
 }
+
 
  // ITERATION 2
  const calculateAll = () => {
   const products = document.querySelectorAll('.product');
-  let counter = 0;
+  let totalValue = 0;
   products.forEach((products) => {
-    counter += updateSubtotal(products);
+    totalValue += updateSubtotal(products);
   });
 
   // ITERATION 3
-const total = document. querySelector('#total-value span');
-total.innerHTML = counter;
+const total = document.querySelector('#total-value span');
+total.innerHTML = totalValue;
  };
 
 // ITERATION 4
 
 const removeProduct = (event) => {
-  const target = event.currentTarget.parentElement.parentElement;
+  let target = event.currentTarget.parentElement.parentElement;
   target.parentElement.removeChild(target);
   calculateAll();
 }
@@ -67,11 +72,11 @@ window.addEventListener('load', () => {
   const calculatePricesBtn = document.getElementById('calculate');
   calculatePricesBtn.addEventListener('click', calculateAll);
 
-  const removeBtn = document.querySelectorAll('.btn-remove');
+  let removeBtn = document.querySelectorAll('.btn-remove');
   removeBtn.forEach((button) => {
     button.addEventListener('click', removeProduct);
   });
 
-  const newProduct = document.querySelector('#create');
+  let newProduct = document.querySelector('#create');
   newProduct.addEventListener('click', createProduct);
 });
